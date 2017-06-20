@@ -19,11 +19,15 @@ jdk:
     
 build:
 
-  pre_ci_boot:
-    image_name: drydock/u16scaall
-    image_tag: master
-    pull: true
+ pre_ci:
+    - echo The PHP version is $SHIPPABLE_SCALA_VERSION
     
+  pre_ci_boot:
+   image_name: drydock/u16scaall
+   image_tag: master
+   pull: false
+   
   ci:
+    - echo The SCALA version is $SHIPPABLE_SCALA_VERSION
     - java -version
     - echo $SHIPPABLE_SCALA_VERSION
