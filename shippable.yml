@@ -19,15 +19,23 @@ jdk:
     
 build:
 
- pre_ci:
-    - echo The PHP version is $SHIPPABLE_SCALA_VERSION
+  pre_ci:
+    - echo The SCALA version is $SHIPPABLE_SCALA_VERSION
+    - docker build -t=shippabledocker/u16scaall:$SHIPPABLE_SCALA_VERSION .
     
   pre_ci_boot:
-   image_name: drydock/u16scaall
-   image_tag: master
+   image_name: shippabledocker/u16scaall
+   image_tag: $SHIPPABLE_SCALA_VERSION
    pull: false
    
   ci:
     - echo The SCALA version is $SHIPPABLE_SCALA_VERSION
     - java -version
     - echo $SHIPPABLE_SCALA_VERSION
+    - lsb_release -a
+    - docker --version
+    - docker info
+    - docker ps
+    
+  post_ci:
+    - docker push shippabledocker/u16phpall:$SHIPPABLE_SCALA_VERSION
