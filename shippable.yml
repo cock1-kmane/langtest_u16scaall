@@ -20,11 +20,11 @@ jdk:
 build:
   pre_ci:
     - echo The SCALA version is $SHIPPABLE_SCALA_VERSION
-    - docker build -t=shippabledocker/u16scaall:$SHIPPABLE_SCALA_VERSIONtest .
+    - docker build -t=shippabledocker/u16scaall:$SHIPPABLE_SCALA_VERSIONinvalid .
     
   pre_ci_boot:
    image_name: shippabledocker/u16scaall
-   image_tag: $SHIPPABLE_SCALA_VERSIONtest
+   image_tag: v$SHIPPABLE_SCALA_VERSION
    pull: false
    
   ci:
@@ -34,6 +34,3 @@ build:
     - docker --version
     - docker info
     - docker ps
-    
-  post_ci:
-    - docker push shippabledocker/u16scaall:$SHIPPABLE_SCALA_VERSIONtest 
